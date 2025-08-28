@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React = require("react");
 
 
-export default function HomeScreen() {
+export default function IndexScreen() {
     const [step, setStep] = useState(0);
 
     useEffect(() => {
