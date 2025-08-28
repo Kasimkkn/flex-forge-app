@@ -1,10 +1,10 @@
 import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
-import React from "react";
-import { Text } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler"; // 👈 import this
+import { Text, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "./global.css";
+import React = require("react");
 
 export default function RootLayout() {
     const [fontsLoaded] = useFonts({
@@ -13,7 +13,11 @@ export default function RootLayout() {
     });
 
     if (!fontsLoaded) {
-        return <Text>Loading fonts...</Text>;
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Loading fonts...</Text>
+            </View>
+        );
     }
 
     return (

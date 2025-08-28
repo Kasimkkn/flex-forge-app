@@ -1,5 +1,5 @@
 import OnboardingFlow from "@/components/welcomScreen/OnboardingScreen";
-import React from "react";
+import React = require("react");
 
 export default function WelComeScreen() {
 

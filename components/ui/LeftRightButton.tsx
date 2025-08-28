@@ -1,7 +1,7 @@
 import LeftIcon from '@/assets/images/icons/arrow-left.svg';
 import RightIcon from '@/assets/images/icons/arrow-right.svg';
-import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import React = require('react');
 
 interface LeftRightButtonProps {
     showLeft?: boolean;
@@ -9,6 +9,7 @@ interface LeftRightButtonProps {
     onLeftPress?: () => void;
     onRightPress?: () => void;
     disabled?: boolean;
+    className?: string;
 }
 
 export default function LeftRightButton({
@@ -16,57 +17,56 @@ export default function LeftRightButton({
     showRight = false,
     onLeftPress,
     onRightPress,
-    disabled = false
+    disabled = false,
+    className,
 }: LeftRightButtonProps) {
+    console.log('LeftRightButton props:', { showLeft, showRight, disabled });
+
     return (
-        <View className="flex-row items-center space-x-4">
+        <View className="flex-row items-center">
             {/* Left Button */}
-            <TouchableOpacity
-                onPress={onLeftPress}
-                disabled={disabled || !showLeft}
-                className={`
-                    w-14 h-14 rounded-full items-center justify-center
-                    ${showLeft
-                        ? disabled
-                            ? 'bg-gray-400'
-                            : 'bg-primary-500'
-                        : 'bg-transparent'
-                    }
-                `}
-                activeOpacity={0.7}
-            >
-                {showLeft && (
+            {showLeft && (
+                <TouchableOpacity
+                    onPress={() => {
+                        console.log('Left button pressed');
+                        onLeftPress?.();
+                    }}
+                    disabled={disabled}
+                    className={`
+                        w-44 h-24 rounded-3xl items-center justify-center bg-primary-500
+                        ${className}
+                    `}
+                    activeOpacity={0.7}
+                >
                     <LeftIcon
                         width={24}
                         height={24}
                         color={disabled ? '#9CA3AF' : '#FFFFFF'}
                     />
-                )}
-            </TouchableOpacity>
+                </TouchableOpacity>
+            )}
 
             {/* Right Button */}
-            <TouchableOpacity
-                onPress={onRightPress}
-                disabled={disabled || !showRight}
-                className={`
-                    w-14 h-14 rounded-full items-center justify-center
-                    ${showRight
-                        ? disabled
-                            ? 'bg-gray-400'
-                            : 'bg-primary-500'
-                        : 'bg-transparent'
-                    }
-                `}
-                activeOpacity={0.7}
-            >
-                {showRight && (
+            {showRight && (
+                <TouchableOpacity
+                    onPress={() => {
+                        console.log('Right button pressed');
+                        onRightPress?.();
+                    }}
+                    disabled={disabled}
+                    className={`
+                        w-44 h-24 rounded-3xl items-center justify-center bg-primary-500
+                        ${className}
+                    `}
+                    activeOpacity={0.7}
+                >
                     <RightIcon
                         width={24}
                         height={24}
                         color={disabled ? '#9CA3AF' : '#FFFFFF'}
                     />
-                )}
-            </TouchableOpacity>
+                </TouchableOpacity>
+            )}
         </View>
     );
 }
