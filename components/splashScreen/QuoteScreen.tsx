@@ -1,21 +1,22 @@
-import React from "react";
+import React = require("react");
+import Qoutes from "@/assets/images/icons/quotes.svg";
 import { ImageBackground, Text, View } from "react-native";
 
 export default function QuoteScreen() {
     return (
         <ImageBackground
             source={require("../../assets/images/male-2.png")}
-            className="flex-1 justify-end px-6 pb-12 bg-black"
+            className="flex-1 justify-end items-center px-6 pb-40 bg-black"
             resizeMode="cover"
         >
-            <View className="bg-orange-500 w-10 h-10 rounded-full items-center justify-center mb-4">
-                <Text className="text-white text-lg">“</Text>
+            <View className="bg-orange-500 rounded-3xl p-5 items-center justify-center mb-4">
+                <Qoutes width={30} height={30} />
             </View>
-            <Text className="text-white text-lg font-medium leading-6">
+            <Text className="text-white text-3xl font-roboto font-medium">
                 "Remember, physical fitness can neither be acquired by wishful
                 thinking nor by outright purchase."
             </Text>
-            <Text className="text-white mt-3 font-semibold">— JOSEPH PILATES</Text>
+            <Text className="text-white text-end font-semibold mt-10">— JOSEPH PILATES</Text>
         </ImageBackground>
     );
 }

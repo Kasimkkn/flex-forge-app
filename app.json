@@ -33,6 +33,43 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Roboto_regular.ttf",
+            "./assets/fonts/Display-Bold.ttf"
+          ],
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "Roboto",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Roboto_regular.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "Display",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Display-Bold.ttf",
+                    "weight": 700
+                  }
+                ]
+              }
+            ]
+          },
+          "ios": {
+            "fonts": [
+              "./assets/fonts/Roboto_regular.ttf",
+              "./assets/fonts/Display-Bold.ttf"
+            ]
+          }
+        }
       ]
     ],
     "experiments": {

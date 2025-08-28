@@ -1,6 +1,7 @@
 import { Slot } from "expo-router";
-import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import './global.css';
+import React = require("react");
 
 export default function RootLayout() {
     return (

@@ -7,7 +7,7 @@ export default function ProgressScreen() {
     useEffect(() => {
         const interval = setInterval(() => {
             setProgress((p) => (p < 100 ? p + 2 : 100));
-        }, 100);
+        }, 10);
         return () => clearInterval(interval);
     }, []);
 
@@ -17,10 +17,10 @@ export default function ProgressScreen() {
             className="flex-1 items-center justify-center"
             resizeMode="cover"
         >
-            <View className="bg-black/60 w-full h-full items-center justify-center">
-                <Text className="text-white text-5xl font-bold">
+            <View className="w-full h-full items-center justify-center">
+                <Text className="text-white text-7xl font-extrabold font-display">
                     {progress}
-                    <Text className="text-orange-500">%</Text>
+                    <Text className="text-orange-500 text-5xl">%</Text>
                 </Text>
             </View>
         </ImageBackground>
