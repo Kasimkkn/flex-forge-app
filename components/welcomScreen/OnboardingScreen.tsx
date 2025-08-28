@@ -93,7 +93,7 @@ export default function OnboardingFlow() {
     const handleSignIn = () => {
         console.log('Sign In pressed - navigating to signin');
         // Use router.push instead of Link for programmatic navigation
-        router.push('/signin');
+        router.push('/auth/signin');
     };
 
     console.log("🔄 Current Screen:", currentScreen);
