@@ -1,5 +1,6 @@
+import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { ImageBackground, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 import ButtonWithIcon from '../ui/ButtonWithIcon';
 import LeftRightButton from '../ui/LeftRightButton';
 
@@ -11,16 +12,20 @@ interface OnboardingData {
     primaryButton?: string;
     secondaryButton?: string;
     hasNavigation?: boolean;
+    redirectTo?: string;
+    redirectLabel?: string;
 }
 
 const onboardingData: OnboardingData[] = [
     {
         id: 1,
         backgroundImage: require('@/assets/images/female-3.png'), // Adjust path as needed
-        title: 'Welcome To\nsandOwl UI Kit!',
+        title: 'Welcome To\n FlexForge Fitness',
         subtitle: 'Your personal fitness AI Assistant 🔥',
         primaryButton: 'Get Started',
-        secondaryButton: 'Already have account? Sign In',
+        secondaryButton: 'Already have account?',
+        redirectLabel: 'Sign In',
+        redirectTo: '/signin',
         hasNavigation: false,
     },
     {
@@ -79,9 +84,11 @@ export default function OnboardingFlow() {
     };
 
     const handleGetStarted = () => {
+        console.log('Navigate to Screen 1');
         setCurrentScreen(1);
     };
 
+    console.log("🔄 Current Screen:", currentScreen);
     const handleSignIn = () => {
         console.log('Navigate to Sign In');
     };
@@ -91,96 +98,79 @@ export default function OnboardingFlow() {
     // Welcome Screen (First Screen)
     if (currentScreen === 0) {
         return (
-            <SafeAreaView className="flex-1">
-                <ImageBackground
-                    source={currentData.backgroundImage}
-                    className="flex-1"
-                    resizeMode="cover"
-                >
-                    {/* Logo */}
-                    <View className="absolute top-16 left-1/2 transform -translate-x-1/2">
-                        <View className="w-8 h-8 bg-white rounded items-center justify-center">
-                            <Text className="text-primary-500 text-xl font-bold">+</Text>
-                        </View>
-                    </View>
+            <ImageBackground
+                source={currentData.backgroundImage}
+                style={{ flex: 1 }}   // ✅ required
+                resizeMode="cover"
+            >
+                <View className="flex-1 justify-end items-center pb-20 px-6">
+                    <Text style={{ fontWeight: '900' }} className="text-white text-4xl mb-4 text-center tracking-widest">
+                        {currentData.title}
+                    </Text>
+                    <Text className="text-white text-lg mb-8 text-center opacity-90">
+                        {currentData.subtitle}
+                    </Text>
 
-                    {/* Content */}
-                    <View className="flex-1 justify-end pb-20 px-6">
-                        <Text className="text-white text-4xl font-bold mb-4 text-center">
-                            {currentData.title}
+                    <ButtonWithIcon
+
+                        label={currentData.primaryButton} onPress={handleGetStarted} className='w-56 px-10 py-4' />
+
+                    {/* Sign In Link */}
+                    <TouchableOpacity onPress={handleSignIn} className="mt-6 flex flex-row gap-2">
+                        <Text className="text-white text-base opacity-80">
+                            {currentData.secondaryButton}
                         </Text>
-                        <Text className="text-white text-lg mb-8 text-center opacity-90">
-                            {currentData.subtitle}
-                        </Text>
+                        <Link href={currentData.redirectTo} className="text-primary-500 underline font-bold text-base opacity-80">
+                            {currentData.redirectLabel}
+                        </Link>
+                    </TouchableOpacity>
 
-                        <ButtonWithIcon label={currentData.primaryButton} onPress={handleGetStarted} />
-
-                        {/* Sign In Link */}
-                        <TouchableOpacity onPress={handleSignIn} className="items-center">
-                            <Text className="text-white text-base opacity-80">
-                                {currentData.secondaryButton}
-                            </Text>
-                        </TouchableOpacity>
-
-                        {/* Page Indicator */}
-                        <View className="flex-row justify-center mt-8">
-                            {onboardingData.map((_, index) => (
-                                <View
-                                    key={index}
-                                    className={`w-2 h-2 rounded-full mx-1 ${index === 0 ? 'bg-white' : 'bg-white opacity-30'
-                                        }`}
-                                />
-                            ))}
-                        </View>
-                    </View>
-                </ImageBackground>
-            </SafeAreaView>
+                </View>
+            </ImageBackground>
         );
     }
 
     // Other Onboarding Screens
     return (
-        <SafeAreaView className="flex-1">
-            <ImageBackground
-                source={currentData.backgroundImage}
-                className="flex-1"
-                resizeMode="cover"
-            >
-                {/* Content */}
-                <View className="flex-1 justify-end pb-32 px-6">
-                    <Text className="text-white text-4xl font-bold mb-4 text-center">
-                        {currentData.title}
-                    </Text>
-                    <Text className="text-white text-lg mb-12 text-center opacity-90">
-                        {currentData.subtitle}
-                    </Text>
+        <ImageBackground
+            source={currentData.backgroundImage}
+            style={{ flex: 1 }}   // ✅ required
+            resizeMode="cover"
+        >
+            {/* Content */}
+            <View className="flex-1 justify-end pb-32 px-6">
+                <Text className="text-white text-4xl font-bold mb-4 text-center">
+                    {currentData.title}
+                </Text>
+                <Text className="text-white text-lg mb-12 text-center opacity-90">
+                    {currentData.subtitle}
+                </Text>
+            </View>
+
+            {/* Bottom Navigation */}
+            <View className="absolute bottom-8 left-0 right-0 px-6">
+                {/* Navigation Buttons */}
+                <View className="flex-row justify-center items-center mb-6">
+                    {/* Left Button */}
+                    <LeftRightButton showLeft onLeftPress={handlePrevious} />
+                    {/* Right Button */}
+                    {currentData.hasNavigation && (
+                        <LeftRightButton showRight onRightPress={handleNext} />
+                    )}
+
                 </View>
 
-                {/* Bottom Navigation */}
-                <View className="absolute bottom-8 left-0 right-0 px-6">
-                    {/* Navigation Buttons */}
-                    <View className="flex-row justify-center items-center mb-6">
-                        {/* Left Button */}
-                        <LeftRightButton showLeft onLeftPress={handlePrevious} />
-                        {/* Right Button */}
-                        {currentData.hasNavigation && (
-                            <LeftRightButton showRight onRightPress={handleNext} />
-                        )}
-
-                    </View>
-
-                    {/* Page Indicator */}
-                    <View className="flex-row justify-center">
-                        {onboardingData.map((_, index) => (
-                            <View
-                                key={index}
-                                className={`w-2 h-2 rounded-full mx-1 ${index === currentScreen ? 'bg-white' : 'bg-white opacity-30'
-                                    }`}
-                            />
-                        ))}
-                    </View>
+                {/* Page Indicator */}
+                <View className="flex-row justify-center">
+                    {onboardingData.map((_, index) => (
+                        <View
+                            key={index}
+                            className={`w-2 h-2 rounded-full mx-1 ${index === currentScreen ? 'bg-white' : 'bg-white opacity-30'
+                                }`}
+                        />
+                    ))}
                 </View>
-            </ImageBackground>
-        </SafeAreaView>
+            </View>
+        </ImageBackground>
     );
 }

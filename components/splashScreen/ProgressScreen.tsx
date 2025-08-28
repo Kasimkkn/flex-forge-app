@@ -1,4 +1,4 @@
-import { router } from "expo-router"; // Change this
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { ImageBackground, Text, View } from "react-native";
 
@@ -14,7 +14,7 @@ export default function ProgressScreen() {
 
     useEffect(() => {
         if (progress === 100) {
-            router.push("/welcome/index");
+            router.replace("/welcome");
         }
     }, [progress]);
 
