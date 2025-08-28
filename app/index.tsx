@@ -1,8 +1,10 @@
 import ProgressScreen from "@/components/splashScreen/ProgressScreen";
 import QuoteScreen from "@/components/splashScreen/QuoteScreen";
 import SplashScreen from "@/components/splashScreen/SplashScreen";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import React = require("react");
+
 
 export default function HomeScreen() {
     const [step, setStep] = useState(0);

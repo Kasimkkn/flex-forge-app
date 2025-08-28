@@ -4,7 +4,7 @@ import { ImageBackground, Text, View } from "react-native";
 export default function QuoteScreen() {
     return (
         <ImageBackground
-            source={require("../../assets/images/images/male-2.png")}
+            source={require("../../assets/images/male-2.png")}
             className="flex-1 justify-end px-6 pb-12 bg-black"
             resizeMode="cover"
         >
